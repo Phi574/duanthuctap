@@ -283,3 +283,41 @@ form button[type="submit"]:hover {
         position: static;
     }
 }
+/* =========================================
+   MOBILE FILTER STYLES (BUTTON NỔI)
+========================================= */
+
+/* Mặc định trên PC: Ẩn nút Filter mobile */
+#mobile-filter-btn {
+    display: none;
+}
+
+/* Chỉ áp dụng cho màn hình nhỏ (Mobile/Tablet < 1024px) */
+@media (max-width: 1024px) {
+    
+    /* 1. Hiện nút Filter nổi */
+    #mobile-filter-btn {
+        display: flex !important;
+    }
+
+    /* 2. Biến Form lọc thành Bottom Sheet (Trượt từ dưới lên) */
+    #filter-sidebar {
+        position: fixed;
+        bottom: -100%; /* Giấu xuống dưới đáy ban đầu */
+        left: 0;
+        width: 100%;
+        height: auto;
+        max-height: 85vh; /* Chiếm tối đa 85% chiều cao màn hình */
+        overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+        z-index: 50; /* Cao hơn overlay */
+        border-radius: 20px 20px 0 0; /* Bo tròn góc trên */
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+        padding-bottom: 30px; /* Thêm khoảng trống đáy */
+        transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng trượt nảy mượt mà */
+    }
+
+    /* 3. Class kích hoạt khi bấm nút (JS sẽ thêm class này) */
+    #filter-sidebar.active-mobile {
+        bottom: 0 !important; /* Trượt lên vị trí 0 */
+    }
+}

@@ -51,7 +51,6 @@
                 <a href="index.php?action=gioithieu" class="nav-link active">giới thiệu</a>
                 <a href="index.php?action=lienhe" class="nav-link">liên hệ</a>
             </nav>
-
             <a
                 href="tel:<?= $data_index_settings['hotline'] ?? '0900000000' ?>"
                 class="bg-orange-600 hover:bg-orange-700 px-5 py-2.5 rounded-full font-bold text-xs transition-all flex items-center gap-2"
@@ -59,6 +58,20 @@
                 <i class="fa-solid fa-phone-volume animate-pulse"></i>
                 <?= $data_index_settings['hotline'] ?? 'Gọi ngay' ?>
             </a>
+            <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl p-2 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/95 z-[999] hidden flex-col items-center justify-center space-y-8 transition-opacity duration-300">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-white text-4xl p-2 hover:text-orange-500 transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="text-3xl font-bold text-white mb-4">SinhDoi<span class="text-[#ff5722]">Land</span>
+    </div>
+        <a href="index.php?action=trangchu" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Trang Chủ</a>
+        <a href="index.php?action=list_product" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Bất Động Sản</a>
+        <a href="index.php?action=gioithieu" class="mobile-link text-xl font-bold text-[#ff5722] tracking-widest transition">Giới Thiệu</a>
+        <a href="index.php?action=lienhe" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Liên Hệ</a>
+    </div>
         </div>
     </header>
 
@@ -198,6 +211,31 @@
             </div>
         </div>
     </footer>
+<script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
+    function toggleMenu() {
+        menuOverlay.classList.toggle('hidden');
+        menuOverlay.classList.toggle('flex');
+        
+        // Khóa cuộn trang khi mở menu
+        if (!menuOverlay.classList.contains('hidden')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+
+    // Tự đóng menu khi bấm vào link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
+</script>
 </body>
 </html>

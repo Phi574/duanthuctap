@@ -43,6 +43,7 @@
                 <a href="index.php?action=gioithieu" class="nav-link">giới thiệu</a>
                 <a href="index.php?action=lienhe" class="nav-link">liên hệ</a>
             </nav>
+        
 
             <a
                 href="tel:<?= $data_index_settings['hotline'] ?? '0900000000' ?>"
@@ -51,6 +52,24 @@
                 <i class="fa-solid fa-phone-volume animate-pulse"></i>
                 <?= $data_index_settings['hotline'] ?? 'Gọi ngay' ?>
             </a>
+            <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl p-2 focus:outline-none">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/95 z-[999] hidden flex-col items-center justify-center space-y-8 transition-opacity duration-300">
+    <button id="close-menu-btn" class="absolute top-6 right-6 text-white text-4xl p-2 hover:text-orange-500 transition">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="text-3xl font-bold text-white mb-4">
+        SinhDoi<span class="text-[#ff5722]">Land</span>
+    </div>
+
+    <a href="index.php?action=trangchu" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Trang Chủ</a>
+    <a href="index.php?action=list_product" class="mobile-link text-xl font-bold text-[#ff5722] tracking-widest transition">Bất Động Sản</a>
+    <a href="index.php?action=gioithieu" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">giới thiệu</a>
+    <a href="index.php?action=lienhe" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">liên hệ</a>
+</div>
         </div>
     </header>
 
@@ -227,96 +246,135 @@ $gia_selected = isset($_POST['gia']) ? $_POST['gia'] : 2000000000; // mặc đ�
 ?>
 
             <<!-- FILTER SIDEBAR -->
-<form action="index.php?action=search" method="POST" class="search-form">
+<button id="mobile-filter-btn" class="lg:hidden fixed bottom-24 right-4 z-50 w-14 h-14 bg-[#ff5722] text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-transform animate-bounce">
+    <i class="fa-solid fa-filter"></i>
+</button>
 
-    <h3 class="text-sm font-extrabold text-slate-800 uppercase tracking-wide mb-2">
-        Tìm kiếm nâng cao
-    </h3>
-
-    <!-- KEYWORD -->
-    <div class="form-group">
-        <label>Từ khóa</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="tukhoa" placeholder="Nhập từ khóa..." />
+<div class="col-span-12 lg:col-span-3">
+    
+    <div id="filter-sidebar" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 sticky top-24 transition-all duration-300">
+        
+        <div class="flex justify-between items-center mb-6 border-b lg:border-none pb-4 lg:pb-0 lg:hidden">
+            <h3 class="font-bold text-xl flex items-center gap-2 text-[#ff5722]">
+                <i class="fa-solid fa-filter"></i> Bộ lọc tìm kiếm
+            </h3>
+            <button id="close-filter-btn" class="text-3xl text-slate-400 hover:text-[#ff5722]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
-    </div>
 
-    <!-- TYPE -->
-    <div class="form-group">
-        <label>Loại bất động sản</label>
-        <select name="loaibds">
-            <option value="">-------</option>
-        <?php
-            foreach($phanloaibds as $loai_bds)
-                {
-                    ?>
-                        
-                            <option value="<?=  $loai_bds['ten_loai'] ?>"><?=  $loai_bds['ten_loai'] ?></option>
-                        
-                    <?php
-                }
-        ?>
-        </select>
-    </div>
+        <form action="index.php?action=search" method="POST" class="search-form space-y-5">
 
-    <!-- LOCATION -->
-    <div class="form-group">
-        <label>Tỉnh / Thành phố</label>
-        <select name="tinhthanh">
-            <option value="">-------</option>
-            <?php
-            foreach($data_list as $tinhthanh)
-                {
-                    ?>
-                        
-                            <option value="<?=  $tinhthanh['tinh_thanh'] ?>" ><?=  $tinhthanh['tinh_thanh'] ?></option>
-                        
-                    <?php
-                }
-        ?>
-            
-        </select>
-    </div>
+            <h3 class="text-sm font-extrabold text-slate-800 uppercase tracking-wide mb-2 hidden lg:block">
+                Tìm kiếm nâng cao
+            </h3>
 
-    <!-- AREA -->
-    <div class="form-group">
-        <label>Diện tích (m²)</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-ruler-combined"></i>
-            <input type="number" name="dientich" placeholder="VD: 50" />
-        </div>
-    </div>
+            <div class="form-group">
+                <label class="font-bold text-sm text-slate-600 mb-1 block">Từ khóa</label>
+                <div class="input-icon relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                    <input type="text" name="tukhoa" placeholder="Nhập từ khóa..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#ff5722]" />
+                </div>
+            </div>
 
-    <!-- PRICE RANGE -->
-    <div class="form-group">
-    <label>Giá tối đa (tỷ)</label>
-    <div class="range-wrap">
-        <input
-            type="range"
-            id="priceRange"
-            name="gia"
-            min="500000000"
-            max="10000000000"
-            step="100000000"
-            value="<?= $gia_selected ?>"
-        />
-        <span id="rangeValue">
-            <?= number_format($gia_selected / 1000000000, 1) ?>
-        </span>
+            <div class="form-group">
+                <label class="font-bold text-sm text-slate-600 mb-1 block">Loại bất động sản</label>
+                <select name="loaibds" class="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#ff5722]">
+                    <option value="">-- Tất cả --</option>
+                    <?php foreach($phanloaibds as $loai_bds): ?>
+                        <option value="<?= $loai_bds['ten_loai'] ?>"><?= $loai_bds['ten_loai'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="font-bold text-sm text-slate-600 mb-1 block">Tỉnh / Thành phố</label>
+                <select name="tinhthanh" class="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#ff5722]">
+                    <option value="">-- Tất cả --</option>
+                    <?php foreach($data_list as $tinhthanh): ?>
+                        <option value="<?= $tinhthanh['tinh_thanh'] ?>"><?= $tinhthanh['tinh_thanh'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="font-bold text-sm text-slate-600 mb-1 block">Diện tích (m²)</label>
+                <div class="input-icon relative">
+                    <i class="fa-solid fa-ruler-combined absolute left-3 top-3 text-slate-400"></i>
+                    <input type="number" name="dientich" placeholder="VD: 50" class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#ff5722]" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="font-bold text-sm text-slate-600 mb-1 block">
+                    Giá tối đa: <span id="rangeValue" class="text-[#ff5722] font-bold"><?= number_format(($gia_selected ?? 500000000) / 1000000000, 1) ?></span> tỷ
+                </label>
+                <div class="range-wrap mt-2">
+                    <input
+                        type="range"
+                        id="priceRange"
+                        name="gia"
+                        min="500000000"
+                        max="10000000000"
+                        step="100000000"
+                        value="<?= $gia_selected ?? 5000000000 ?>"
+                        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#ff5722]"
+                    />
+                    <div class="flex justify-between text-xs text-slate-400 mt-1">
+                        <span>0.5 tỷ</span>
+                        <span>10 tỷ+</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" name="btn_search" class="w-full bg-[#ff5722] text-white font-bold py-3 rounded-xl shadow-lg hover:bg-orange-700 transition-all flex justify-center items-center gap-2">
+                <i class="fa-solid fa-filter"></i>
+                Áp dụng bộ lọc
+            </button>
+
+        </form>
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const filterBtn = document.getElementById('mobile-filter-btn');
+        const closeFilterBtn = document.getElementById('close-filter-btn');
+        const filterSidebar = document.getElementById('filter-sidebar');
+        
+        // Tạo màn đen mờ (Overlay)
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/60 z-40 hidden transition-opacity duration-300';
+        document.body.appendChild(overlay);
 
+        function toggleFilter() {
+            filterSidebar.classList.toggle('active-mobile');
+            
+            if (filterSidebar.classList.contains('active-mobile')) {
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Khóa cuộn trang
+            } else {
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
 
+        if(filterBtn) filterBtn.addEventListener('click', toggleFilter);
+        if(closeFilterBtn) closeFilterBtn.addEventListener('click', toggleFilter);
+        overlay.addEventListener('click', toggleFilter);
 
-    <!-- SUBMIT -->
-    <button type="submit" name="btn_search">
-        <i class="fa-solid fa-filter mr-2"></i>
-        Áp dụng bộ lọc
-    </button>
-
-</form>
+        // Logic kéo thanh giá (Price Range)
+        const range = document.getElementById('priceRange');
+        const valueDisplay = document.getElementById('rangeValue');
+        if(range && valueDisplay) {
+            range.addEventListener('input', function() {
+                // Chia cho 1 tỷ để hiển thị gọn
+                let valInBillion = (this.value / 1000000000).toFixed(1);
+                valueDisplay.innerText = valInBillion;
+            });
+        }
+    });
+</script>
 
             
         </div>
@@ -401,6 +459,32 @@ $gia_selected = isset($_POST['gia']) ? $_POST['gia'] : 2000000000; // mặc đ�
     </footer>
 
     <script src="views/js/list_product.js"></script>
+    <script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function toggleMenu() {
+        menuOverlay.classList.toggle('hidden');
+        menuOverlay.classList.toggle('flex');
+        
+        // Khóa cuộn trang khi mở menu
+        if (!menuOverlay.classList.contains('hidden')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+
+    // Tự đóng menu khi bấm vào link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
+</script>
 </body>
 
 </html>
