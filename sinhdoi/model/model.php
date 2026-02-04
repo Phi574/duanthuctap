@@ -197,6 +197,27 @@ class model
         return $images;
     }
 
+
+    public function tuvan_trangchu($nguoinhan_id, $name_khach, $sdt_khach, $email, $noidung) 
+{
+
+    $sql = "INSERT INTO tuvan (ten_khach, phone, email, noi_dung, user_nhan_id) 
+            VALUES ('$name_khach', '$sdt_khach', '$email', '$noidung', '$nguoinhan_id')";
+            
+    return $this->conn->query($sql);
+}
+
+
+
+ public function tuvan_product($nguoinhan_id, $name_khach, $sdt_khach, $email, $noidung, $baidang_id) 
+{
+
+    $sql = "INSERT INTO tuvan (ten_khach, phone, email, noi_dung, user_nhan_id, baidang_id) 
+            VALUES ('$name_khach', '$sdt_khach', '$email', '$noidung', '$nguoinhan_id', '$baidang_id')";
+            
+    return $this->conn->query($sql);
+}
+
 }
 
 ?>

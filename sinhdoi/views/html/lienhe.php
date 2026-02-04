@@ -131,11 +131,11 @@
             <div class="lg:w-2/3 bg-white p-8 rounded-xl shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-bold text-gray-800 mb-8">Gửi Lời Nhắn Cho Chúng Tôi</h2>
                 
-                <form action="index.php?act=contact_submit" method="POST" class="space-y-6">
+                <form action="index.php?action=tuvan_trangchu" method="POST" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-gray-600">Họ và Tên *</label>
-                            <input type="text" name="ho_ten" required placeholder="Nhập họ và tên" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition">
+                            <input type="text" name="name" required placeholder="Nhập họ và tên" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-gray-600">Email *</label>
@@ -145,19 +145,16 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-gray-600">Số Điện Thoại</label>
-                            <input type="tel" name="so_dien_thoai" placeholder="Nhập số điện thoại" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition">
+                            <input type="tel" name="sdt" placeholder="Nhập số điện thoại" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition">
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-sm font-semibold text-gray-600">Tiêu Đề *</label>
-                            <input type="text" name="tieu_de" required placeholder="Bạn quan tâm đến dự án nào?" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition">
-                        </div>
+                        
                     </div>
                     <div class="space-y-2">
                         <label class="text-sm font-semibold text-gray-600">Nội Dung Tin Nhắn *</label>
-                        <textarea name="noi_dung" required rows="4" placeholder="Nhập nội dung tin nhắn chi tiết..." class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition"></textarea>
+                        <textarea name="noidung" required rows="4" placeholder="Nhập nội dung tin nhắn chi tiết..." class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-orange-main transition"></textarea>
                     </div>
                     
-                    <button type="submit" name="gui_lien_he" class="w-full bg-orange-main text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition flex items-center justify-center gap-2 shadow-lg shadow-orange-100">
+                    <button type="submit" name="btn_tuvan_product" class="w-full bg-orange-main text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition flex items-center justify-center gap-2 shadow-lg shadow-orange-100">
                         <i class="fa fa-paper-plane"></i> GỬI TIN NHẮN NGAY
                     </button>
                     <p class="text-center text-xs text-gray-400 italic font-medium">* Chúng tôi cam kết bảo mật thông tin của bạn</p>

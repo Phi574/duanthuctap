@@ -12,6 +12,8 @@
         rel="stylesheet"
     />
     <link rel="stylesheet" href="views/css/product.css" />
+
+
 </head>
 <body class="bg-gray-100">
 
@@ -179,25 +181,85 @@
         </div>
 
         <div class="space-y-6">
-            <div class="bg-white p-6 rounded-lg shadow-sm sticky top-4">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">R</div>
-                    <div>
-                        <p class="font-bold"><?=  $data['name'] ?></p>
-                        <p class="text-xs text-gray-400">đăng ngày : <?=  $data['created_at'] ?></p>
-                    </div>
-                </div>
-                
-                <div class="space-y-3">
-                    <button class="w-full py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition">
-                        <i class="fas fa-phone-alt mr-2"></i> <?=  $data['phone'] ?> <span class="text-xs font-normal ml-2">gọi ngay</span>
-                    </button>
-                    
-                </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm sticky top-4">
 
-                
+        
+        <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                <?= strtoupper(substr($data['name'], 0, 1)) ?>
+            </div>
+            <div>
+                <p class="font-bold"><?= $data['name'] ?></p>
+                <p class="text-xs text-gray-400">
+                    đăng ngày : <?= $data['created_at'] ?>
+                </p>
             </div>
         </div>
+
+        
+        <div class="space-y-3 mb-6">
+            <a href="tel:<?= $data['phone'] ?>"
+               class="block w-full py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition text-center">
+                <i class="fas fa-phone-alt mr-2"></i>
+                <?= $data['phone'] ?>
+                <span class="text-xs font-normal ml-2">gọi ngay</span>
+            </a>
+        </div>
+
+        
+        <div class="border-t pt-5">
+            <h3 class="font-bold text-sm mb-4 uppercase text-gray-700">
+                Nhận tư vấn bất động sản
+            </h3>
+
+            <form action="index.php?action=tuvan_product" method="post" class="space-y-3">
+
+                
+                <input type="hidden" name="baidang_id" value="<?= $_GET['id'] ?>">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Họ và tên"
+                    required
+                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                >
+
+                <input
+                    type="tel"
+                    name="sdt"
+                    placeholder="Số điện thoại"
+                    required
+                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                >
+
+                <textarea
+                    name="noidung"
+                    rows="3"
+                    placeholder="Nội dung cần tư vấn"
+                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                ></textarea>
+
+                <button
+                name="btn_tuvan_product"
+                    type="submit"
+                    class="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition" onclick="alert('gửi thành công, chúng tôi sẽ liên hệ lại sớm nhất có thể')"
+                >
+                    Gửi yêu cầu tư vấn
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
 
     </div>
     <footer class="bg-[#0b0f19] text-gray-400 pt-24 pb-12 overflow-hidden relative">

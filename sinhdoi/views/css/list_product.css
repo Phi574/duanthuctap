@@ -283,41 +283,65 @@ form button[type="submit"]:hover {
         position: static;
     }
 }
+
 /* =========================================
-   MOBILE FILTER STYLES (BUTTON NỔI)
+   MOBILE FILTER STYLES (FIX LỖI BỊ ĐÈ & KHÔNG HIỆN)
 ========================================= */
 
-/* Mặc định trên PC: Ẩn nút Filter mobile */
-#mobile-filter-btn {
-    display: none;
+/* Ẩn các nút trên PC */
+#mobile-filter-btn, #close-filter-btn {
+    display: none !important;
 }
 
-/* Chỉ áp dụng cho màn hình nhỏ (Mobile/Tablet < 1024px) */
+#filter-sidebar {
+    display: block;
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+/* --- GIAO DIỆN MOBILE (< 1024px) --- */
 @media (max-width: 1024px) {
     
-    /* 1. Hiện nút Filter nổi */
+    /* 1. Hiện nút icon tròn */
     #mobile-filter-btn {
         display: flex !important;
+        z-index: 999999 !important; /* Luôn nổi trên cùng */
     }
 
-    /* 2. Biến Form lọc thành Bottom Sheet (Trượt từ dưới lên) */
+    /* 2. Cấu hình bảng lọc (Dùng Transform để trượt mượt hơn) */
     #filter-sidebar {
-        position: fixed;
-        bottom: -100%; /* Giấu xuống dưới đáy ban đầu */
-        left: 0;
-        width: 100%;
-        height: auto;
-        max-height: 85vh; /* Chiếm tối đa 85% chiều cao màn hình */
-        overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
-        z-index: 50; /* Cao hơn overlay */
-        border-radius: 20px 20px 0 0; /* Bo tròn góc trên */
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-        padding-bottom: 30px; /* Thêm khoảng trống đáy */
-        transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng trượt nảy mượt mà */
+        display: block !important;
+        position: fixed !important;
+        top: auto !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 85vh !important; /* Chiếm 85% màn hình */
+        background: #ffffff !important;
+        
+        /* Z-Index cực cao để đè lên Overlay */
+        z-index: 2147483647 !important; 
+        
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -10px 50px rgba(0,0,0,0.5);
+        padding: 20px;
+        overflow-y: auto;
+
+        /* Mặc định: Đẩy xuống dưới đáy màn hình (Ẩn) */
+        transform: translateY(100%); 
+        opacity: 1 !important; /* Luôn hiển thị, chỉ là bị đẩy xuống thôi */
+        visibility: visible !important;
     }
 
-    /* 3. Class kích hoạt khi bấm nút (JS sẽ thêm class này) */
+    /* 3. KHI KÍCH HOẠT: Kéo form lên vị trí 0 */
     #filter-sidebar.active-mobile {
-        bottom: 0 !important; /* Trượt lên vị trí 0 */
+        transform: translateY(0) !important;
+    }
+
+    /* Hiện nút đóng */
+    #close-filter-btn {
+        display: block !important;
     }
 }

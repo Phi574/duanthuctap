@@ -6,54 +6,119 @@
         <title>SinhDoiLand - Bất Động Sản Cao Cấp</title>
 
         <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    />
-    <link rel="stylesheet" href="views/css/list_product.css" />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="views/css/list_product.css" />
         <link rel="stylesheet" href="/duanthuctap/sinhdoi/views/css/index.css" />
     </head>
+    <style>
+        /* ==============================
+   HERO SWIPER FIX
+================================ */
 
+        .hero-swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-swiper .swiper-wrapper {
+            display: flex;
+        }
+
+        .hero-swiper .swiper-slide {
+            flex-shrink: 0;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .hero-swiper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ==============================
+   HERO SWIPER – FORCE FULL COVER
+================================ */
+
+        /* Khung swiper PHẢI có chiều cao */
+        .hero-swiper {
+            width: 100%;
+            height: 420px; /* bắt buộc */
+        }
+
+        /* Wrapper */
+        .hero-swiper .swiper-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Slide */
+        .hero-swiper .swiper-slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* IMG BỊ ÉP PHỦ KÍN */
+        .hero-swiper .swiper-slide img {
+            position: absolute; /* 👈 QUAN TRỌNG */
+            inset: 0; /* top right bottom left = 0 */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 👈 luôn phủ kín */
+            object-position: center;
+        }
+    </style>
     <body class="bg-slate-50 text-slate-900">
-        
         <header class="bg-[#111] text-white sticky top-0 z-[100] shadow-xl">
-        <div class="container mx-auto px-4 h-16 flex justify-between items-center">
+            <div class="container mx-auto px-4 h-16 flex justify-between items-center">
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div
+                        class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-900/20 group-hover:rotate-12 transition-transform overflow-hidden"
+                    >
+                        <img
+                            src="/DUANTHUCTAP/uploads/<?= $data_index_settings['logo'] ?? '' ?>"
+                            alt="Logo"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
 
-            <div class="flex items-center space-x-3 group cursor-pointer">
-                <div
-                    class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-900/20 group-hover:rotate-12 transition-transform overflow-hidden"
-                >
-                    <img
-                        src="/DUANTHUCTAP/uploads/<?= $data_index_settings['logo'] ?? '' ?>"
-                        alt="Logo"
-                        class="w-full h-full object-cover"
-                    />
+                    <span class="font-extrabold text-2xl tracking-tighter uppercase">
+                        <?= $data_index_settings['site_name'] ?? 'SINHDOILAND' ?>
+                    </span>
                 </div>
 
-                <span class="font-extrabold text-2xl tracking-tighter uppercase">
-                    <?= $data_index_settings['site_name'] ?? 'SINHDOILAND' ?>
-                </span>
-            </div>
+                <nav class="hidden md:flex items-center space-x-8 text-[13px] uppercase font-bold tracking-wider">
+                    <a href="index.php?action=trangchu" class="nav-link active">Trang Chủ</a>
+                    <a href="index.php?action=list_product" class="nav-link">Bất Động Sản</a>
+                    <a href="index.php?action=gioithieu" class="nav-link">giới thiệu</a>
+                    <a href="index.php?action=lienhe" class="nav-link">liên hệ</a>
+                </nav>
 
-            <nav class="hidden md:flex items-center space-x-8 text-[13px] uppercase font-bold tracking-wider">
-                
-                <a href="index.php?action=trangchu"  class="nav-link active">Trang Chủ</a>
-                <a href="index.php?action=list_product" class="nav-link">Bất Động Sản</a>
-                <a href="index.php?action=gioithieu" class="nav-link">giới thiệu</a>
-                <a href="index.php?action=lienhe" class="nav-link">liên hệ</a>
-                
-            </nav>
-            <a
-                href="tel:<?= $data_index_settings['hotline'] ?? '0900000000' ?>"
-                class="bg-orange-600 hover:bg-orange-700 px-5 py-2.5 rounded-full font-bold text-xs transition-all flex items-center gap-2"
-            >
-                <i class="fa-solid fa-phone-volume animate-pulse"></i>
-                <?= $data_index_settings['hotline'] ?? 'Gọi ngay' ?>
-            </a>
-            <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl p-2 focus:outline-none">
+                <a
+                    href="tel:<?= $data_index_settings['hotline'] ?? '0900000000' ?>"
+                    class="bg-orange-600 hover:bg-orange-700 px-5 py-2.5 rounded-full font-bold text-xs transition-all flex items-center gap-2"
+                >
+                    <i class="fa-solid fa-phone-volume animate-pulse"></i>
+                    <?= $data_index_settings['hotline'] ?? 'Gọi ngay' ?>
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl p-2 focus:outline-none">
     <i class="fa-solid fa-bars"></i>
 </button>
 
@@ -71,8 +136,8 @@
     <a href="index.php?action=gioithieu" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Giới Thiệu</a>
     <a href="index.php?action=lienhe" class="mobile-link text-xl font-bold text-white hover:text-[#ff5722] tracking-widest transition">Liên Hệ</a>
 </div>
-        </div>
-    </header>
+            </div>
+        </header>
 
         <section class="relative min-h-screen flex items-center bg-[#0b0f19] pt-20 overflow-hidden">
             <div class="absolute inset-0 opacity-30">
@@ -122,27 +187,26 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img
-                                        src="https://images.unsplash.com/photo-1600585154340-be6191da004c?auto=format&fit=crop&w=800&q=80"
+                                        src="/DUANTHUCTAP/uploads/<?= $data_index_settings['slide1'] ?>"
                                         class="w-full h-full object-cover"
                                         alt="Slide 1"
                                     />
                                 </div>
                                 <div class="swiper-slide">
                                     <img
-                                        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+                                        src="/DUANTHUCTAP/uploads/<?= $data_index_settings['slide2'] ?>"
                                         class="w-full h-full object-cover"
                                         alt="Slide 2"
                                     />
                                 </div>
                                 <div class="swiper-slide">
                                     <img
-                                        src="https://images.unsplash.com/photo-1600607687940-47a0f9259017?auto=format&fit=crop&w=800&q=80"
+                                        src="/DUANTHUCTAP/uploads/<?= $data_index_settings['slide3'] ?>"
                                         class="w-full h-full object-cover"
                                         alt="Slide 3"
                                     />
                                 </div>
                             </div>
-                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -423,64 +487,57 @@
             </div>
         </footer>
 
-        <div
-            id="contactModal"
-            class="fixed inset-0 z-[200] hidden items-center justify-center p-6 bg-black/70 backdrop-blur-sm"
-        >
-            <div class="bg-white w-full max-w-lg rounded-[3rem] shadow-2xl overflow-hidden relative">
-                <button
-                    onclick="closeModal()"
-                    class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-[#ff5722] hover:text-white transition-all"
-                >
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="bg-[#ff5722] p-8 text-white text-center">
-                    <h3 class="text-2xl font-bold uppercase">Nhận tư vấn ngay</h3>
-                    <p class="text-orange-100 text-sm opacity-80">Chúng tôi sẽ liên hệ lại sau 5 phút</p>
-                </div>
-                <form id="form-tuvan" method="POST" action="index.php?action=gui_tuvan" class="p-8 space-y-4">
-                    <input type="hidden" name="is_ajax" value="1" />
-                    <input
-                        type="text"
-                        name="ten_khach"
-                        required
-                        placeholder="Họ và tên"
-                        class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]"
-                    />
-                    <input
-                        type="text"
-                        name="phone"
-                        required
-                        placeholder="Số điện thoại"
-                        class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]"
-                    />
-                    <input
-                        type="text"
-                        name="email"
-                        required
-                        placeholder="Email"
-                        class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]"
-                    />
-                    <textarea
-                        name="noi_dung"
-                        rows="2"
-                        placeholder="Bạn cần tư vấn gì?"
-                        class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]"
-                    ></textarea>
-                    <button
-                        type="submit"
-                        class="w-full bg-[#ff5722] text-white font-bold py-5 rounded-2xl shadow-lg hover:bg-[#e64a19] transition-all uppercase tracking-widest"
-                    >
-                        Gửi Thông Tin
-                    </button>
-                </form>
-            </div>
+        <div id="contactModal"
+     class="hidden fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+
+    <div class="bg-white w-full max-w-lg rounded-[3rem] shadow-2xl overflow-hidden relative">
+        <button onclick="closeModal()"
+            class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-[#ff5722] hover:text-white transition-all">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="bg-[#ff5722] p-8 text-white text-center">
+            <h3 class="text-2xl font-bold uppercase">Nhận tư vấn ngay</h3>
+            <p class="text-orange-100 text-sm opacity-80">Chúng tôi sẽ liên hệ lại sau 5 phút</p>
         </div>
 
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script src="/duanthuctap/sinhdoi/views/js/index.js"></script>
-        <script>
+        <!-- ✅ THÔNG BÁO THÀNH CÔNG -->
+        <div id="successMessage" class="hidden p-12 text-center">
+            <i class="fa-solid fa-circle-check text-5xl text-green-500 mb-4"></i>
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">
+                Gửi thông tin thành công 🎉
+            </h3>
+            <p class="text-slate-500">
+                Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
+            </p>
+        </div>
+
+        <!-- ✅ FORM -->
+        <form id="form-tuvan"
+              method="POST"
+              action="index.php?action=tuvan_trangchu"
+              class="p-8 space-y-4">
+
+            <input type="text" name="name" required placeholder="Họ và tên"
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]" />
+
+            <input type="text" name="sdt" required placeholder="Số điện thoại"
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]" />
+
+            <input type="email" name="email" required placeholder="Email"
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]" />
+
+            <textarea name="noidung" rows="2" placeholder="Bạn cần tư vấn gì?"
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-[#ff5722]"></textarea>
+
+            <button type="submit" name="btn_tuvan_trangchu" value="1"
+                class="w-full bg-[#ff5722] text-white font-bold py-5 rounded-2xl shadow-lg hover:bg-[#e64a19] transition-all uppercase tracking-widest">
+                Gửi Thông Tin
+            </button>
+        </form>
+    </div>
+</div>
+<script>
     const menuBtn = document.getElementById('mobile-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
     const menuOverlay = document.getElementById('mobile-menu-overlay');
@@ -506,5 +563,82 @@
         link.addEventListener('click', toggleMenu);
     });
 </script>
+        
     </body>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    if (window.AOS) {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    }
+
+    const modal = document.getElementById('contactModal');
+    const form  = document.getElementById('form-tuvan');
+    const successMessage = document.getElementById('successMessage');
+
+    window.openModal = function () {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    };
+
+    window.closeModal = function () {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    };
+
+
+    if (!localStorage.getItem('submittedConsultation')) {
+        setTimeout(openModal, 5000);
+    }
+
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(() => {
+   
+            form.classList.add('hidden');
+
+  
+            successMessage.classList.remove('hidden');
+
+
+            localStorage.setItem('submittedConsultation', 'true');
+
+            setTimeout(closeModal, 2500);
+        })
+        .catch(() => {
+            alert('Có lỗi xảy ra, vui lòng thử lại!');
+        });
+    });
+
+ 
+    if (document.querySelector('.hero-swiper')) {
+        new Swiper('.hero-swiper', {
+            slidesPerView: 1,
+            loop: true,
+            speed: 900,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            }
+        });
+    }
+
+});
+</script>
+
 </html>

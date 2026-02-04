@@ -51,6 +51,7 @@
                 <a href="index.php?action=gioithieu" class="nav-link active">giới thiệu</a>
                 <a href="index.php?action=lienhe" class="nav-link">liên hệ</a>
             </nav>
+
             <a
                 href="tel:<?= $data_index_settings['hotline'] ?? '0900000000' ?>"
                 class="bg-orange-600 hover:bg-orange-700 px-5 py-2.5 rounded-full font-bold text-xs transition-all flex items-center gap-2"

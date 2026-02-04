@@ -1,0 +1,148 @@
+/* ===============================
+   TƯ VẤN - DANH SÁCH ADMIN
+================================ */
+
+.main {
+    padding: 24px;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* Tiêu đề */
+.main h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* ===============================
+   TABLE
+================================ */
+
+.tuvan-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tuvan-table thead {
+    background: #f1f5f9;
+}
+
+.tuvan-table th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.tuvan-table td {
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #374151;
+    border-bottom: 1px solid #f1f1f1;
+    vertical-align: top;
+}
+
+.tuvan-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ===============================
+   KHÁCH HÀNG
+================================ */
+
+.tuvan-table td strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ===============================
+   TRẠNG THÁI
+================================ */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.status-done {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+/* ===============================
+   NÚT HÀNH ĐỘNG
+================================ */
+
+.btn-process {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-process:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* ===============================
+   EMAIL + PHONE
+================================ */
+
+.tuvan-table small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+    .tuvan-table {
+        font-size: 13px;
+    }
+
+    .tuvan-table th,
+    .tuvan-table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tuvan-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .main h2 {
+        font-size: 18px;
+    }
+}
