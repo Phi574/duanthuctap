@@ -120,3 +120,96 @@ body{
     font-size: 13px;
     color: var(--muted);
 }
+/* ========================================================
+   MOBILE ADMIN RESPONSIVE (Add to style.css)
+======================================================== */
+
+/* Ẩn nút Toggle trên PC */
+#sidebar-toggle {
+    display: none;
+}
+
+/* Sidebar Overlay (Màn đen mờ) */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998; /* Dưới sidebar nhưng trên nội dung */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* --- GIAO DIỆN MOBILE & TABLET (< 1024px) --- */
+@media (max-width: 1024px) {
+
+    /* 1. Thay đổi Layout chính: Sidebar ẩn, Content full */
+    .admin-wrapper {
+        display: block !important; /* Phá vỡ flexbox */
+        position: relative;
+    }
+
+    /* 2. Sidebar biến thành Menu trượt (Offcanvas) */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px; /* Giấu sang trái */
+        width: 260px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+
+    /* Class kích hoạt để hiện Sidebar */
+    .sidebar.active {
+        left: 0 !important;
+    }
+
+    /* 3. Main Content mở rộng */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 15px;
+    }
+
+    /* 4. Header: Hiện nút Menu */
+    header {
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+
+    #sidebar-toggle {
+        display: flex !important; /* Hiện nút flex */
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: #333;
+        cursor: pointer;
+        padding: 10px;
+        margin-right: 15px;
+    }
+
+    /* 5. Fix bảng dữ liệu bị vỡ */
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+    }
+    
+    table {
+        min-width: 800px; /* Ép bảng rộng ra để cuộn */
+    }
+}

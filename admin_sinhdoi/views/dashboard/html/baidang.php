@@ -22,7 +22,7 @@ include __DIR__ . '/../../layout/html/sidebar.php';
 
     <div class="action-header">
         <a href="index.php?action=baidang_add" class="btn btn-add">
-            <i class="fas fa-plus"></i> + Thêm bài đăng
+            <i class="fas fa-plus"></i> Thêm bài đăng
         </a>
     </div>
 
