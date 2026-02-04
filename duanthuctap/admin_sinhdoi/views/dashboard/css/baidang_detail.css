@@ -1,0 +1,81 @@
+/* Tổng thể khung chứa */
+.main {
+    margin-left: 260px; /* Khớp với sidebar của bạn */
+    padding: 88px 24px 80px;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 24px;
+}
+
+/* Hộp chi tiết (Card) */
+.detail-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    max-width: 900px; /* Giới hạn độ rộng để dễ đọc */
+}
+
+.detail-box p {
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+}
+
+.detail-box p strong {
+    color: #1e293b;
+    width: 150px;
+    display: inline-block; /* Giúp các tiêu đề thẳng hàng */
+}
+
+/* Phần nội dung mô tả */
+.detail-box .content {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    color: #334155;
+    white-space: pre-line; /* Giữ định dạng xuống dòng */
+}
+
+/* Nút quay lại */
+.btn.back {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #64748b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn.back:hover {
+    background: #475569;
+    transform: translateX(-5px); /* Hiệu ứng nhích sang trái khi hover */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .detail-box p strong {
+        display: block; /* Trên mobile tiêu đề nằm trên nội dung */
+        margin-bottom: 4px;
+    }
+}
+

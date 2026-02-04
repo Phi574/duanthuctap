@@ -1,0 +1,65 @@
+.nav-link {
+    position: relative;
+    color: #e5e7eb; /* gray-200 */
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background-color: #f97316; /* orange-500 */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* trạng thái đang active */
+.nav-link.active {
+    color: #ffffff;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+
+/* ===== FIX SWIPER HERO ===== */
+.hero-swiper {
+    width: 100%;
+    height: 520px; /* bắt buộc */
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-swiper .swiper-wrapper {
+    display: flex;
+}
+
+.hero-swiper .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-swiper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero-swiper {
+        height: 280px;
+    }
+}
